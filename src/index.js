@@ -16,34 +16,24 @@ module.exports = function getZerosCount(number, base) {
     }
   }
 
-  var mnoj = [[],[],[]];
-  mnoj[0][0] = mn[0];
-  mnoj[1][0] = 0;
-  mnoj[2][0] = 0;
-  j=0;
-  for (var i = 0; i < mn.length; i++) {
-    if (mn[i] == mnoj[0][j]) {
-      mnoj[1][j]++;
-    } else {
-      j++;
-      mnoj[0][j] = mn[i];
-      mnoj[1][j] = 1;
-      mnoj[2][j] = 0;
-    }
-  }
+  var mnoj = mn[mn.length-1];
 
-  var del = mnoj[0][mnoj[0].length-1];
-  for (var i = 2; i <= number; i++) {
-    if ((i % del) == 0) {
-      j = i;
-      while ((j % del) == 0) {
-        j = j / del;
-        mnoj[2][mnoj[0].length-1]++;
-      }
-    }
-  }
+  /*var st = 1;
+  j = number;
+  while ((j % mnoj) == 0) {
+    j = j / mnoj;
+    st++;
+  }*/
 
-  zero = mnoj[2][mnoj[0].length-1] / mnoj[1][mnoj[0].length-1];
+  var i = mnoj;
+  while (i <= number) {
+    j = i;
+    while ((j % mnoj) == 0) {
+      j = j / mnoj;
+      zero++;
+    }
+    i = i + mnoj;
+  }
 
   return Math.floor(zero);
 }
