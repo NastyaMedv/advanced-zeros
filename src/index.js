@@ -6,6 +6,9 @@ module.exports = function getZerosCount(number, base) {
   if (base % 2 == 0) { b = base / 2; }
     else { b = (base-1) / 2;}
 
+  if (base == 2) { return 0;}
+  if (base == 3) { return 0;}
+
   var i = b, j = b;
   while (i <= number) {
     j = i;
