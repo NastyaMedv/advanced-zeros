@@ -16,7 +16,7 @@ module.exports = function getZerosCount(number, base) {
     }
   }
 
-  var mnoj = [[],[],[],[]];
+  var mnoj = [[],[],[]];
   mnoj[0][0] = mn[0];
   mnoj[1][0] = 0;
   mnoj[2][0] = 0;
@@ -32,31 +32,18 @@ module.exports = function getZerosCount(number, base) {
     }
   }
 
+  var del = mnoj[0][mnoj[0].length-1];
   for (var i = 2; i <= number; i++) {
-    for (var x = 0; x < mnoj[0].length; x++) {
-      if ((i % mnoj[0][x]) == 0) {
-        j = i;
-        while ((j % mnoj[0][x]) == 0) {
-          j = j / mnoj[0][x];
-          mnoj[2][x]++;
-        }
+    if ((i % del) == 0) {
+      j = i;
+      while ((j % del) == 0) {
+        j = j / del;
+        mnoj[2][mnoj[0].length-1]++;
       }
     }
   }
 
-  for (var i = 0; i < mnoj[0].length; i++) {
-    mnoj[3][i] = mnoj[2][i] / mnoj[1][i];
-  }
-
-  zero = mnoj[3][0];
-  for (var i = 1; i < mnoj[0].length; i++) {
-    if (mnoj[3][i] < zero) {
-      zero = mnoj[3][i];
-    }
-  }
-
-
-
+  zero = mnoj[2][mnoj[0].length-1] / mnoj[1][mnoj[0].length-1];
 
   return Math.floor(zero);
 }
